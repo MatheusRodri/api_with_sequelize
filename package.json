@@ -1,0 +1,19 @@
+{
+  "name": "project_with_db",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MatheusRodri/project_with_DB.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MatheusRodri/project_with_DB/issues"
+  },
+  "homepage": "https://github.com/MatheusRodri/project_with_DB#readme"
+}
