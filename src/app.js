@@ -1,13 +1,19 @@
 const http = require("http");
+const express = require("express");
+const { request, response } = require("express");
+
+const app = express();
 
 const hostname = "127.0.0.1";
 const port = 3000;
 
-const server = http.createServer((req,res)=>{
-    res.statusCode = 200;
-    res.setHeader("Content-type","text/plain");
-    res.end("Hello World \n")
-});
+app.set("port",port);
+
+app.use((request,response,next)=>{
+    response.status(404).send();
+})
+
+const server = http.createServer(app);
 
 server.listen(port, hostname,()=>{
     console.log(`Servidor em http://${hostname}:${port}/`);
