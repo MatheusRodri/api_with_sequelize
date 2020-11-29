@@ -1,20 +1,31 @@
 const http = require("http");
 const express = require("express");
-const { request, response } = require("express");
+const spoilerRoute = require('./routes/spoilers');
+const sequelize = require("./database/database");
 
 const app = express();
 
-const hostname = "127.0.0.1";
-const port = 3000;
 
 app.set("port",port);
+
+app.use(express.json());
+
+app.use('/api',spoilerRoute);
 
 app.use((request,response,next)=>{
     response.status(404).send();
 })
 
-const server = http.createServer(app);
+app.use((error, request, response,next)=>{
+    response.status(500).json({error});
+});
 
-server.listen(port, hostname,()=>{
-    console.log(`Servidor em http://${hostname}:${port}/`);
-})
+sequelize.sync({force:true}).then(()=>{
+    const port = process.env.PORT || 3000;
+    
+    app.set('port',port);
+
+    const server = http.createServer(app);
+
+    server.listen(port)
+});
