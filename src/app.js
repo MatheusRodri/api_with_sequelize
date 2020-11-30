@@ -6,8 +6,6 @@ const sequelize = require("./database/database");
 const app = express();
 
 
-app.set("port",port);
-
 app.use(express.json());
 
 app.use('/api',spoilerRoute);

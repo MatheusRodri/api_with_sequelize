@@ -1,11 +1,9 @@
-const { request, response } = require("express");
 const Spoiler = require("../model/spoiler");
 
 exports.buscarUm = (request,response, next) =>{
-    const id = request.parms.id;
+    const id = request.params.id;
 
-    Spoiler.findById(id)
-    .then(spoiler =>{
+    Spoiler.findById(id).then(spoiler =>{
         if(spoiler){
             response.send(spoiler);
         }else{
@@ -28,7 +26,7 @@ exports.buscarTodos = (request, response, next) =>{
     limite = limite> ITENS_POR_PAGINA || limite <=0 ? ITENS_POR_PAGINA: limite;
     pagina = pagina <= 0 ? 0 : pagina * limite;
 
-    spoiler.findAll({limit: limite, offset:pagina})
+    Spoiler.findAll({limit: limite, offset:pagina})
     .then(spoilers =>{
         response.send(spoilers)
     })
@@ -36,7 +34,7 @@ exports.buscarTodos = (request, response, next) =>{
 };
 
 exports.criar = (request,response,next) =>{
-    const titulo = resquest.body.titulo
+    const titulo = request.body.titulo
     const espoliador = request.body.espoliador
     const descricao = request.body.descricao
     
@@ -51,8 +49,8 @@ exports.criar = (request,response,next) =>{
     .catch((error)=> next(error))
 };
 
-exports.atualizar = (resquest,response,next)=>{
-    const id = resquest.parms.id;
+exports.atualizar = (request,response,next)=>{
+    const id = request.params.id;
 
     const titulo = request.body.titulo;
     const espoliador = request.body.espoliador;
