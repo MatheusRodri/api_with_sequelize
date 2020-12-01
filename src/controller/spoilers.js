@@ -7,11 +7,10 @@ exports.buscarUm = (request,response, next) =>{
         if(spoiler){
             response.send(spoiler);
         }else{
-            response.status(404).send();
+            response.status(404).send(); 
         }
-    })
-    .catch(error => next(error));
-}
+    }).catch((error) => next(error))
+} 
 
 exports.buscarTodos = (request, response, next) =>{
     let limite = parseInt(request.query.limte || 0);
