@@ -1,13 +1,13 @@
 const Spoiler = require("../model/spoiler");
+const status = require("http-status");
 
-exports.buscarUm = (request,response, next) =>{
-    const id = request.params.id;
-
-    Spoiler.findById(id).then(spoiler =>{
-        if(spoiler){
-            response.send(spoiler);
-        }else{
-            response.status(404).send(); 
+exports.buscarUm = (request, response, next) => {
+    const id = request.params.id
+    Spoiler.findById(id).then((spoiler) => {
+        if (spoiler) {
+            response.status(status.OK).send(spoiler)
+        } else {
+            response.status(status.NOT_FOUND).send()
         }
     }).catch((error) => next(error))
 } 
