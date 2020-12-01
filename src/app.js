@@ -1,30 +1,29 @@
 const http = require("http");
 const express = require("express");
-const spoilerRoute = require('./routes/spoilers');
+const status = require("http-status");
+const spoilersRoute = require("./routes/spoilers");
 const sequelize = require("./database/database");
-const status = require("http-status")
 
 const app = express();
 
-
 app.use(express.json());
 
-app.use('/api',spoilerRoute);
+app.use("/api", spoilersRoute);
 
-app.use((request,response,next)=>{
-    response.status(status.NOT_FOUND).send();
-})
-
-app.use((error, request, response,next)=>{
-    response.status(status.INTERNAL_SERVER_ERROR).json({error});
+app.use((request, response, next) => {
+  response.status(status.NOT_FOUND).send();
 });
 
-sequelize.sync({force:true}).then(()=>{
-    const port = process.env.PORT || 3000;
-    
-    app.set('port',port);
+app.use((error, request, response, next) => {
+  response.status(status.INTERNAL_SERVER_ERROR).json({ error });
+});
 
-    const server = http.createServer(app);
+sequelize.sync({ force: true }).then(() => {
+  const port = process.env.PORT || 3000;
 
-    server.listen(port)
+  app.set("port", port);
+
+  const server = http.createServer(app);
+
+  server.listen(port);
 });
