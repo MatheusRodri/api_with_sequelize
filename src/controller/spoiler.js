@@ -58,7 +58,7 @@ exports.atualizar = (request, response, next) => {
   const espoliador = request.body.espoliador;
   const descricao = request.body.descricao;
 
-  Spoiler.findById(id)
+  Spoiler.findByPk(id)
     .then(spoiler => {
       if (spoiler) {
         Spoiler.update(
@@ -83,7 +83,7 @@ exports.atualizar = (request, response, next) => {
 exports.excluir = (request, response, next) => {
   const id = request.params.id;
 
-  Spoiler.findById(id)
+  Spoiler.findByPk(id)
     .then(spoiler => {
       if (spoiler) {
         Spoiler.destroy({
