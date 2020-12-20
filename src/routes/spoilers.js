@@ -1,5 +1,7 @@
 const express = require("express");
 const controller = require("../controller/spoiler");
+const mysql = require("mysql")
+const id = require("../model/spoiler")
 
 const router = express.Router();
 

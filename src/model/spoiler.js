@@ -2,13 +2,13 @@ const Sequelize = require("sequelize");
 const sequelize = require("../database/database");
 
 const Spoiler = sequelize.define("spoiler", {
-  id: {
+  id:{
     allowNull: false,
     autoIncrement: true,
     primaryKey: true,
     type: Sequelize.INTEGER
   },
-  titulo: {
+  titulo:{
     allowNull: false,
     type: Sequelize.STRING(255),
     validate: {
