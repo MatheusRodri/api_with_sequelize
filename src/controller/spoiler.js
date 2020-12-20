@@ -5,14 +5,15 @@ exports.buscarUm = (request, response, next) => {
   const id = request.params;
   const teste = id.id
   console.log(teste)
-  console.log(Spoiler.findById(1))
-   Spoiler.getPostById(teste)
-    .then(spoiler => {
-      response.json(spoiler)
-     }).catch(error =>{
-       response.json(error)
-     })
-    };
+   Spoiler.findByPk(teste)
+    .then(spoiler => {if (spoiler) {
+      response.status(status.OK).send(spoiler);
+    } else {
+      response.status(status.NOT_FOUND).send();
+    }
+  })
+  .catch(error => next(error));
+};
 
 exports.buscarTodos = (request, response, next) => {
   let limite = parseInt(request.query.limite || 0);
